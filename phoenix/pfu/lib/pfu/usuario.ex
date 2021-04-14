@@ -1,3 +1,3 @@
-defmodule Pfu.User do
+defmodule Pfu.Usuario do
   defstruct [:id, :name, :username, :password]
 end
