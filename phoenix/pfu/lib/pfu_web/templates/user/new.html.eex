@@ -1,24 +1,4 @@
 <%= Routes.user_path(@conn, :new)%>
 <h1>Novo Usuário</h1>
 
-<!--   ## Explixar na proxima aula e usar o form.html.eex -->
-<%= Phoenix.HTML.Form.form_for @changeset, Routes.user_path(@conn, :create), fn f -> %>
-    <%= if @changeset.action do %>
-        <div class="alert alert-danger">
-            <p>Algo incorreto! Por favor, verificar erros abaixo.</p>
-        </div>
-    <% end %>
-    <div class="form-group">
-        <%= text_input f, :name, placeholder: "Name", class: "form-control" %>
-        <%= error_tag f, :name %>
-    </div>
-    <div class="form-group">
-        <%= text_input f, :username, placeholder: "Username", class: "form-control" %>
-        <%= error_tag f, :username %>
-    </div>
-    <div class="form-group">
-        <%= password_input f, :password, placeholder: "Password", class: "form-control" %>
-        <%= error_tag f, :password %>
-    </div>
-    <%= submit "RECORD", class: "btn btn-primary" %>
-<% end %>
+<%= render "form.html", Map.put(@conn.assigns, :action, Routes.user_path(@conn, :create)) %>

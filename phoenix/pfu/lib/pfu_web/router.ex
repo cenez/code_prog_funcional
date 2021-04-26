@@ -1,6 +1,5 @@
 defmodule PfuWeb.Router do
   use PfuWeb, :router
-  alias PfuWeb.Router.Helpers, as: Routes
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -9,6 +8,7 @@ defmodule PfuWeb.Router do
     plug :put_root_layout, {PfuWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Pfu.Auth, repo: Pfu.Repo
   end
 
   pipeline :api do
@@ -20,6 +20,7 @@ defmodule PfuWeb.Router do
 
     live "/", PageLive, :index
     get  "/hello/:name", HelloController, :world
+    get "/logout", LogoutController, :index
     #get "/users", UserController, :index
     #get "/users/:id", UserController, :show
     resources "/users", UserController, only: [:index, :show, :new, :create, :delete, :edit, :update]
