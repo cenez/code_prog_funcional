@@ -2,6 +2,7 @@ defmodule PfuWeb.UserController do
   use PfuWeb, :controller
   alias Pfu.Repo
   alias Pfu.User
+  alias PfuWeb.Auth
 
   plug :authenticate_user when action in [:index, :show]
 
@@ -33,7 +34,7 @@ defmodule PfuWeb.UserController do
     case Repo.insert(changeset) do
       {:ok, user} ->
         conn
-          |> Pfu.Auth.login(user)
+          |> Auth.login(user)
           |> put_flash(:info, "#{user.name} created!")
           |> redirect(to: Routes.user_path(conn, :index))
       {:error, changeset} ->

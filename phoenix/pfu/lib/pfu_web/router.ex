@@ -8,7 +8,7 @@ defmodule PfuWeb.Router do
     plug :put_root_layout, {PfuWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug Pfu.Auth, repo: Pfu.Repo
+    plug PfuWeb.Auth, repo: Pfu.Repo
   end
 
   pipeline :api do
@@ -24,7 +24,7 @@ defmodule PfuWeb.Router do
     #get "/users", UserController, :index
     #get "/users/:id", UserController, :show
     resources "/users", UserController, only: [:index, :show, :new, :create, :delete, :edit, :update]
-
+    resources "/sessions", SessionController, only: [:new, :create, :delete]
   end
 
   # Other scopes may use custom stacks.

@@ -1,7 +1,7 @@
-defmodule Pfu.Auth do
+defmodule PfuWeb.Auth do
   import Plug.Conn
   import Phoenix.Controller
-  #import Bcrypt, only: [verify_pass: 2, no_user_verify: 0]
+  import Bcrypt, only: [verify_pass: 2, no_user_verify: 0]
   alias Pfu.User
   alias PfuWeb.Router.Helpers, as: Routes
 
@@ -35,6 +35,22 @@ defmodule Pfu.Auth do
 
   def logout(conn) do
     conn |> configure_session(drop: true)
+  end
+
+  def login_by_username_and_pass(conn, username, given_pass, opts) do
+    repo = Keyword.fetch!(opts, :repo)
+    user = repo.get_by(User, username: username)
+
+    cond do
+      user && verify_pass(given_pass, user.password_hash) ->
+        {:ok, login(conn, user)}
+      user ->
+        {:error, :unauthorized, conn}
+      true ->
+        no_user_verify()
+        #dummy_checkpw(): tempo variável, para dificultar "Ataque de Temporização"
+        {:error, :not_found, conn}
+    end
   end
 
 end

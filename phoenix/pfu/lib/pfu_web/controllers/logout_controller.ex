@@ -1,6 +1,6 @@
 defmodule PfuWeb.LogoutController do
   use PfuWeb, :controller
-  alias Pfu.Auth
+  alias PfuWeb.Auth
 
   plug :authenticate_user when action in [:index]
 
