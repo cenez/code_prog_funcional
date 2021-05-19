@@ -7,6 +7,7 @@ defmodule Pfu.User do
     field :username, :string
     field :password, :string, virtual: true
     field :password_hash, :string
+    has_many :posts, Pfu.Timeline.Post
 
     timestamps()
   end
