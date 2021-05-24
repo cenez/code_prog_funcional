@@ -21,12 +21,12 @@ defmodule PfuWeb.PostLive.PostComponent do
           <div class="row flipar">
             <div class="column">
               <a href="#" phx-click="like" phx-target="<%= @myself %>">
-                <i class="fa fa-arrow-up">Like: </i> <%= @post.likes_count %>
+                <i class="far fa-thumbs-up"></i><%= @post.likes_count %>
               </a>
             </div>
             <div class="column">
               <a href="#" phx-click="repost" phx-target="<%= @myself %>">
-                <i class="fa fa-arrow-down"></i>Reposts: <%= @post.reposts_count %>
+                <i class="fas fa-retweet"></i><%= @post.reposts_count %>
               </a>
             </div>
             <%= if @current_user.id==@post.user_id do %>
