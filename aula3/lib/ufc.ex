@@ -1,4 +1,4 @@
-defmodule Unifor do
+defmodule UFC do
 
   def processar(true, do: expression), do: String.reverse(expression)
   def processar(false, do: expression), do: expression
@@ -24,7 +24,7 @@ defmodule Unifor do
   end
   defmacro __using__(opts) do
     quote do
-      import Unifor, only: [list_to_string: 2, identidade: 1]
+      import UFC, only: [list_to_string: 2, identidade: 1]
       fn x -> [x, unquote(opts), 8, 9,10] end
     end
   end
